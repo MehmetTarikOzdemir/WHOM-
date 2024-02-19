@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "200260471892",
+    "project_id": "whomii-5bd88",
+    "storage_bucket": "whomii-5bd88.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:200260471892:android:6e0d0c847b8df961e231c1",
+        "android_client_info": {
+          "package_name": "com.disargames.whomii"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "200260471892-it4l5vhss5k03fpageuj589nlq5oam5b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZf_BEM7QXHBaBEzHJLczDbwf7ORw1AX4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "200260471892-it4l5vhss5k03fpageuj589nlq5oam5b.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "200260471892-53bslhofo4e1pg76j5vgb3bbfvpjud18.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.whomii.whomii.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:200260471892:android:50827f3982d33f45e231c1",
+        "android_client_info": {
+          "package_name": "com.whomii.whomii"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "200260471892-it4l5vhss5k03fpageuj589nlq5oam5b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZf_BEM7QXHBaBEzHJLczDbwf7ORw1AX4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "200260471892-it4l5vhss5k03fpageuj589nlq5oam5b.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "200260471892-53bslhofo4e1pg76j5vgb3bbfvpjud18.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.whomii.whomii.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

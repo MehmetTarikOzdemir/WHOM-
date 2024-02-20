@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "200260471892-r1ul0tijb3ai5o3fhced04sqihasl1pk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.disargames.whomii",
+            "certificate_hash": "54b184067ca2fbf55d4fd6e80cb77f0735cc166c"
+          }
+        },
+        {
           "client_id": "200260471892-it4l5vhss5k03fpageuj589nlq5oam5b.apps.googleusercontent.com",
           "client_type": 3
         }

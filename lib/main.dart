@@ -1,14 +1,16 @@
-import 'dart:convert';
-
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:whomii/Login/GoogleLogin.dart';
 import 'package:another_flutter_splash_screen/another_flutter_splash_screen.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:whomii/Menu/WhoiiMennu.dart';
 
 void main() => runApp(MyApp());
+
+late final FirebaseAuth _auth = FirebaseAuth.instance;
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -33,25 +35,33 @@ class Splash extends StatefulWidget {
 var prefsLogin;
 
 class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
-  StartFunction() async {}
   @override
   void initState() {
     super.initState();
-
+    Firebase.initializeApp().whenComplete(() {});
     Future.delayed(const Duration(seconds: 5), () async {
       prefsLogin = await SharedPreferences.getInstance();
       // set value
-
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) {
-            return GoogleLogin(
-              title: 'Naber',
-            );
-          },
-        ),
-      );
+      if (_auth.currentUser?.email != null) {
+        print(_auth.currentUser?.email);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return WhoiiMenu();
+            },
+          ),
+        );
+      } else {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return GoogleLogin();
+            },
+          ),
+        );
+      }
     });
   }
 
@@ -80,9 +90,6 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
                   child: Image.asset("assets/whomanalytic_logo.png"),
                 ),
                 onAnimationEnd: () => debugPrint("On Fade In End"),
-                nextScreen: GoogleLogin(
-                  title: 'NABER',
-                ),
               ),
             ),
           ],

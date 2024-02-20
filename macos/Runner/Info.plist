@@ -29,21 +29,21 @@
     <key>NSPrincipalClass</key>
     <string>NSApplication</string>
     <key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<!-- TODO Replace this value: -->
-				<!-- Copied from GoogleService-Info.plist key REVERSED_CLIENT_ID -->
-				<string>com.googleusercontent.apps.200260471892-obts6c4ds6ms5m9mrl7rth5tdffjq7d0</string>
-			</array>
-		</dict>
-	</array>
-	<key>GIDClientID</key>
-	<!-- TODO Replace this value: -->
-	<!-- Copied from GoogleService-Info.plist key CLIENT_ID -->
-	<string>200260471892-obts6c4ds6ms5m9mrl7rth5tdffjq7d0.apps.googleusercontent.com</string>
+    <array>
+        <dict>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>com.googleusercontent.apps.200260471892-53bslhofo4e1pg76j5vgb3bbfvpjud18</string>
+            </array>
+        </dict>
+    </array>
+    <key>GIDClientID</key>
+    <string>200260471892-53bslhofo4e1pg76j5vgb3bbfvpjud18.apps.googleusercontent.com</string>
+    <key>keychain-access-groups</key>
+    <array>
+        <string>$(AppIdentifierPrefix)com.google.GIDSignIn</string>
+    </array>
 </dict>
 </plist>

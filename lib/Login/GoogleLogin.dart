@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart'; // Firebase Core paketini ekleyin
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:whomii/Menu/WhoiiMennu.dart';
 import 'package:whomii/firebase_options.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 
+// GoogleSignIn'in yapılandırılması
 final GoogleSignIn googleSignIn = GoogleSignIn(
-  // The OAuth client id of your app. This is required.
-  clientId:
-      '200260471892-obts6c4ds6ms5m9mrl7rth5tdffjq7d0.apps.googleusercontent.com',
-  // If you need to authenticate to a backend server, specify its OAuth client. This is optional.
+  clientId: DefaultFirebaseOptions
+      .currentPlatform.iosClientId, // Doğru client ID'yi almak için kullanıldı.
 );
 
 Future<User?> signInWithGoogle() async {
@@ -45,21 +45,7 @@ void signOutGoogle() async {
   }
 }
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  runApp(MaterialApp(
-    title: 'Your App Title',
-    home: GoogleLogin(title: 'Login'),
-  ));
-}
-
 class GoogleLogin extends StatefulWidget {
-  GoogleLogin({Key? key, required this.title}) : super(key: key);
-  final String title;
-
   @override
   _GoogleLoginState createState() => _GoogleLoginState();
 }
@@ -70,7 +56,7 @@ class _GoogleLoginState extends State<GoogleLogin> {
     super.initState();
     Firebase.initializeApp().whenComplete(() {
       print("completed");
-      setState(() {});
+      setState(() async {});
     });
   }
 
@@ -78,41 +64,85 @@ class _GoogleLoginState extends State<GoogleLogin> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: Text("Google Sign-In Example"),
-        ),
         body: Center(
-          child: ElevatedButton(
-            onPressed: () async {
-              // Giriş işlemi başarılıysa kullanıcıyı bir sonraki sayfaya yönlendir
-              User? user = await signInWithGoogle();
-              if (user != null) {
-                print("Kullanıcı Var" + user.displayName.toString());
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => NextPage(),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                'assets/whomanalytic_logo.png', // Resmin yolunu belirtin
+                width: 200, // İsteğe bağlı: Resmin genişliği
+                height: 200, // İsteğe bağlı: Resmin yüksekliği
+              ),
+              SizedBox(height: 30),
+              SizedBox(
+                width: 300,
+                height: 70,
+                child: ElevatedButton(
+                  onPressed: () async {
+                    // Giriş işlemi başarılıysa kullanıcıyı bir sonraki sayfaya yönlendir
+                    User? user = await signInWithGoogle();
+                    if (user != null) {
+                      print("Kullanıcı Var" + user.displayName.toString());
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => WhoiiMenu(),
+                        ),
+                      );
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    backgroundColor: Colors.blue,
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
                   ),
-                );
-              }
-            },
-            child: Text("Sign in with Google"),
+                  child: Text(
+                    "Giriş yap",
+                    style: TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 15),
+              SizedBox(
+                width: 300,
+                height: 70,
+                child: OutlinedButton(
+                  onPressed: () async {
+                    // Giriş işlemi başarılıysa kullanıcıyı bir sonraki sayfaya yönlendir
+                    User? user = await signInWithGoogle();
+                    if (user != null) {
+                      print("Kullanıcı Var" + user.displayName.toString());
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => WhoiiMenu(),
+                        ),
+                      );
+                    }
+                  },
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: Colors.blue,
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  child: Text(
+                    "Kayıt ol",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 17,
+                    ),
+                  ),
+                ),
+              )
+            ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-// Kullanıcı giriş yaptıktan sonra yönlendirilecek olan sayfa
-class NextPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Welcome"),
-      ),
-      body: Center(
-        child: Text("Welcome!"), // Giriş yapan kullanıcıya hoş geldiniz mesajı
       ),
     );
   }

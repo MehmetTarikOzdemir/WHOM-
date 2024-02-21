@@ -7,6 +7,7 @@ import 'package:whomii/Login/GoogleLogin.dart';
 import 'package:another_flutter_splash_screen/another_flutter_splash_screen.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:whomii/Menu/WhoiiMennu.dart';
+import 'package:whomii/firebase_options.dart';
 
 void main() => runApp(MyApp());
 
@@ -38,7 +39,8 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    Firebase.initializeApp().whenComplete(() {});
+    WidgetsFlutterBinding.ensureInitialized();
+    Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
     Future.delayed(const Duration(seconds: 5), () async {
       prefsLogin = await SharedPreferences.getInstance();
       // set value
@@ -53,6 +55,7 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
           ),
         );
       } else {
+        print("GoogleLogin");
         Navigator.push(
           context,
           MaterialPageRoute(

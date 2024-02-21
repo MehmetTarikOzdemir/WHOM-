@@ -21,13 +21,10 @@ class DefaultFirebaseOptions {
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
-        print("android");
         return android;
       case TargetPlatform.iOS:
-        print("iOS");
-        return android;
+        return ios;
       case TargetPlatform.macOS:
-        print("macos");
         return macos;
       case TargetPlatform.windows:
         throw UnsupportedError(
@@ -70,8 +67,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '200260471892',
     projectId: 'whomii-5bd88',
     storageBucket: 'whomii-5bd88.appspot.com',
-    iosClientId:
-        '200260471892-obts6c4ds6ms5m9mrl7rth5tdffjq7d0.apps.googleusercontent.com',
+    androidClientId: '200260471892-npont3lofhtgo95aoo17dah469kr2efb.apps.googleusercontent.com',
+    iosClientId: '200260471892-obts6c4ds6ms5m9mrl7rth5tdffjq7d0.apps.googleusercontent.com',
     iosBundleId: 'com.disargames.whomii',
   );
 
@@ -81,8 +78,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '200260471892',
     projectId: 'whomii-5bd88',
     storageBucket: 'whomii-5bd88.appspot.com',
-    iosClientId:
-        '200260471892-53bslhofo4e1pg76j5vgb3bbfvpjud18.apps.googleusercontent.com',
+    androidClientId: '200260471892-npont3lofhtgo95aoo17dah469kr2efb.apps.googleusercontent.com',
+    iosClientId: '200260471892-53bslhofo4e1pg76j5vgb3bbfvpjud18.apps.googleusercontent.com',
     iosBundleId: 'com.whomii.whomii.RunnerTests',
   );
 }

@@ -58,6 +58,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "200260471892-npont3lofhtgo95aoo17dah469kr2efb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.whomii.whomii",
+            "certificate_hash": "54b184067ca2fbf55d4fd6e80cb77f0735cc166c"
+          }
+        },
+        {
           "client_id": "200260471892-it4l5vhss5k03fpageuj589nlq5oam5b.apps.googleusercontent.com",
           "client_type": 3
         }

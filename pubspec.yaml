@@ -39,7 +39,7 @@ dependencies:
   google_sign_in_web: ^0.12.3+2
   another_flutter_splash_screen: ^1.2.0
   shared_preferences: ^2.2.2
-  cloud_firestore: ^4.15.5
+  cloud_firestore: ^4.11.0
   cloud_firestore_web: ^3.10.5
   cloud_firestore_platform_interface: ^6.1.6
   # The following adds the Cupertino Icons font to your application.

@@ -189,9 +189,10 @@ class _UserInfoPageState extends State<UserInfoPage> {
   Future<void> _saveUserInfo() async {
     UserFirebase user = UserFirebase(
         username: _auth.currentUser!.displayName.toString(),
-        birthDate: _selectedDate,
+        birthDate: _selectedDate.toString(),
         location: _selectedLocation,
-        email: _auth.currentUser!.email.toString());
+        email: _auth.currentUser!.email.toString(),
+        answers: []);
 
     QuerySnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore
         .instance

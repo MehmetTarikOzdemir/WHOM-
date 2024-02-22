@@ -30,7 +30,7 @@ Future<User?> signInWithGoogle(BuildContext context) async {
       final UserCredential authResult =
           await _auth.signInWithCredential(credential);
       final User? user = authResult.user;
-      _saveUser(context);
+      await _saveUserFirebase(context);
 
       return user;
     }
@@ -61,6 +61,7 @@ class _GoogleLoginState extends State<GoogleLogin> {
     super.initState();
     WidgetsFlutterBinding.ensureInitialized();
     Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+    setState(() {});
   }
 
   @override
@@ -126,9 +127,12 @@ class _GoogleLoginState extends State<GoogleLogin> {
                     User? user = await signInWithGoogle(context);
                     if (user != null) {
                       print("Kullanıcı Var" + user.displayName.toString());
-                      Navigator.of(context).push(
+                      Navigator.push(
+                        context,
                         MaterialPageRoute(
-                          builder: (context) => WhoiiMenu(),
+                          builder: (context) {
+                            return WhoiiMenu();
+                          },
                         ),
                       );
                     }
@@ -157,14 +161,8 @@ class _GoogleLoginState extends State<GoogleLogin> {
   }
 }
 
-void _saveUser(BuildContext context) async {
+Future<User?> _saveUserFirebase(BuildContext context) async {
   String email = _auth.currentUser!.email.toString();
-
-  UserFirebase user = UserFirebase(
-      username: _auth.currentUser!.displayName.toString(),
-      birthDate: DateTime.now(),
-      location: '',
-      email: _auth.currentUser!.email.toString());
 
   QuerySnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore
       .instance
@@ -172,20 +170,34 @@ void _saveUser(BuildContext context) async {
       .where('email', isEqualTo: email)
       .get();
 
+  UserFirebase user = UserFirebase(
+    username: _auth.currentUser!.displayName.toString(),
+    birthDate: "null",
+    location: "", // Default değer
+    email: _auth.currentUser!.email.toString(),
+    answers: [],
+  );
+
   if (snapshot.docs.isNotEmpty) {
     // Eğer e-posta adresiyle kayıtlı bir kullanıcı varsa, bu kullanıcıyı güncelle
-    FirebaseFirestore.instance
-        .collection('users')
-        .doc(snapshot.docs.first.id)
-        .update(user.toMap())
-        .then((value) {
-      print("Kullanıcı bilgileri başarıyla güncellendi!");
-    }).catchError((error) {
-      print("Kullanıcı bilgilerini güncellerken bir hata oluştu: $error");
-    });
+    String userCity =
+        snapshot.docs.first.get('location') ?? ""; // Default değer
+    if (userCity.isNotEmpty) {
+    } else {
+      await Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => UserInfoPage(),
+        ),
+      );
+    }
   } else {
     // Eğer e-posta adresiyle kayıtlı bir kullanıcı yoksa, yeni bir kullanıcı oluştur
-    FirebaseFirestore.instance.collection('users').add(user.toMap()).then(
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc()
+        .set(user.toMap())
+        .then(
       (value) async {
         print("Yeni kullanıcı başarıyla kaydedildi!");
         await Navigator.push(
@@ -201,4 +213,5 @@ void _saveUser(BuildContext context) async {
       },
     );
   }
+  return null;
 }

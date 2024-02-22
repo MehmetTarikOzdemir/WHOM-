@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -431,8 +432,8 @@ class QuestionCard extends StatelessWidget {
                                   onPressed: () {
                                     print(_controller.text);
                                     // Pop-up kapatıldığında uygulamadan çık
-                                    Navigator.of(context)
-                                        .popUntil((route) => route.isFirst);
+
+                                    exit(0);
                                   },
                                   child: Text('Uygulamadan Ayrıl'),
                                 ),
